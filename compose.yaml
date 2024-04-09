@@ -1,0 +1,22 @@
+services:
+  db:
+    image: mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: passroot
+      MYSQL_DATABASE: scrapydb
+      MYSQL_USER: scrapydoo
+      MYSQL_PASSWORD: scrapypass
+    ports:
+      - '27017:27017'
+  tomcat:
+    image: douglascamposh/scrapsicoes
+    container_name: scrapsicoes
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - 8050:8050
