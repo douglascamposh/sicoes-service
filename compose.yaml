@@ -10,6 +10,8 @@ services:
       MYSQL_PASSWORD: scrapypass
     ports:
       - '3306:3306'
+    volumes:
+      - ./data:/var/lib/mysql
   tomcat:
     image: douglascamposh/scrapsicoes
     container_name: scrapsicoes
