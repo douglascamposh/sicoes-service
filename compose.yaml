@@ -9,7 +9,7 @@ services:
       MYSQL_USER: scrapydoo
       MYSQL_PASSWORD: scrapypass
     ports:
-      - '27017:27017'
+      - '3306:3306'
   tomcat:
     image: douglascamposh/scrapsicoes
     container_name: scrapsicoes
