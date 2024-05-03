@@ -1,24 +1,22 @@
 services:
-  db:
-    image: mysql
-    container_name: mysql
+  mongo:
+    image: 'mongo:latest'
+    container_name: mongo
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: passroot
-      MYSQL_DATABASE: scrapydb
-      MYSQL_USER: scrapydoo
-      MYSQL_PASSWORD: scrapypass
+      - 'MONGO_INITDB_DATABASE=sicoesdb'
+      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
+      - 'MONGO_INITDB_ROOT_USERNAME=root'
     ports:
-      - '3306:3306'
-    volumes:
-      - ./data:/var/lib/mysql
+      - '27017:27017'
   tomcat:
     image: douglascamposh/scrapsicoes
     container_name: scrapsicoes
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
     depends_on:
-      - db
+      - mongo
     restart: always
     ports:
       - 8050:8050
+
