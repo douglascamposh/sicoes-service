@@ -19,4 +19,11 @@ services:
     restart: always
     ports:
       - 8050:8050
+  next:
+    image: douglascamposh/sicoesweb
+    container_name: sicoesweb
+    depends_on:
+      - tomcat
+    ports:
+      - 3000:3000
 
