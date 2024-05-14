@@ -2,6 +2,7 @@ package com.inkacode.scrapsicoes.service.impl;
 
 import com.inkacode.scrapsicoes.domain.Item;
 import com.inkacode.scrapsicoes.dto.ItemFilterDto;
+import com.inkacode.scrapsicoes.repository.ItemCustomRepository;
 import com.inkacode.scrapsicoes.repository.ItemRepository;
 import com.inkacode.scrapsicoes.service.IItemService;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,12 @@ import java.util.Optional;
 public class ItemServiceImpl implements IItemService {
 
     private final ItemRepository itemRepository;
+    private final ItemCustomRepository itemCustomRepository;
 
     @Override
     public Page<Item> getAllItems(ItemFilterDto filterDto) {
         Pageable pageable = PageRequest.of(filterDto.getPage(), filterDto.getLimit());
-        return itemRepository.findAll(pageable);
+        return itemCustomRepository.searchItems(filterDto.getSearch(), pageable);
     }
 
     @Override

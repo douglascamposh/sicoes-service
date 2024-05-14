@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,9 +31,11 @@ public class ItemController {
     @GetMapping
     public Page<Item> getAllItems(
             @RequestParam(value = "page", defaultValue = "0") @Valid @PositiveOrZero int page,
-            @RequestParam(value = "limit",defaultValue = "10") @Valid @Positive int limit
+            @RequestParam(value = "limit", defaultValue = "10") @Valid @Positive int limit,
+            @RequestParam(value = "search", defaultValue = "") String search
             ) {
         ItemFilterDto filterDto = ItemFilterDto.builder()
+                .search(search)
                 .page(page < 0 ? 0 : page)
                 .limit(limit)
                 .build();
@@ -49,9 +52,14 @@ public class ItemController {
         return ResponseEntity.status(HttpStatus.CREATED).body(itemService.saveItem(item));
     }
 
-    @PutMapping
-    public ResponseEntity<Item> updateItem(@RequestBody Item item) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Item> updateItem(@PathVariable String id, @RequestBody Item item) {
         return ResponseEntity.ok(itemService.updateItem(item));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteItem(@PathVariable String id) {
+        
     }
 
 }
