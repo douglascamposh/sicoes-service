@@ -58,8 +58,9 @@ public class ItemController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public void deleteItem(@PathVariable String id) {
-        
+    public ResponseEntity<?> deleteItem(@PathVariable String id) {
+        itemService.deleteItem(id);
+        return ResponseEntity.ok("The item has been deleted");
     }
 
 }

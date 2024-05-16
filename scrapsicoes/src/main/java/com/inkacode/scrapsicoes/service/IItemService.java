@@ -12,4 +12,5 @@ public interface IItemService {
     Item findById(String id);
     Item saveItem(Item item);
     Item updateItem(Item item);
+    void deleteItem(String id);
 }

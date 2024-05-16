@@ -32,7 +32,7 @@ public class ItemServiceImpl implements IItemService {
         if (itemOptional.isPresent()) {
             return  itemOptional.get();
         }
-        throw new RuntimeException("The Item was not found.");
+        throw new RuntimeException("The Item was not found."); //Todo: add Hanlder Exception to return Not Found
     }
 
     @Override
@@ -48,5 +48,11 @@ public class ItemServiceImpl implements IItemService {
     public Item updateItem(Item item) {
         findById(item.getId());
         return itemRepository.save(item);
+    }
+
+    @Override
+    public void deleteItem(String id) {
+        findById(id);
+        itemRepository.deleteById(id);
     }
 }
