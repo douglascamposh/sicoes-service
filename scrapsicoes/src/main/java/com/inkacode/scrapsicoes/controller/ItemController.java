@@ -34,6 +34,7 @@ public class ItemController {
             @RequestParam(value = "limit", defaultValue = "10") @Valid @Positive int limit,
             @RequestParam(value = "search", defaultValue = "") String search
             ) {
+        //"f2e5dc7595926f0976694c2bf7a458b0"
         ItemFilterDto filterDto = ItemFilterDto.builder()
                 .search(search)
                 .page(page < 0 ? 0 : page)

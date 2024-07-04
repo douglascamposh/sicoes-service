@@ -22,5 +22,6 @@ public class Item {
     private String stateAuction;
     private Long publishDateItem;
     private Long presentationDate;
+    private Long form170Date;
     private Long awardDate;
 }
