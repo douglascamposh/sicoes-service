@@ -21,6 +21,11 @@ public class ItemServiceImpl implements IItemService {
     @Override
     public Page<Item> getAllItems(ItemFilterDto filterDto) {
         Pageable pageable = PageRequest.of(filterDto.getPage(), filterDto.getLimit());
+        if (filterDto.getAuction() != null) {
+            return filterDto.getAuction()
+                    ? itemRepository.findByAuctionIsTrue(pageable)
+                    : itemRepository.findByAuctionIsFalse(pageable);
+        }
         return itemRepository.findAll(pageable);
     }
 

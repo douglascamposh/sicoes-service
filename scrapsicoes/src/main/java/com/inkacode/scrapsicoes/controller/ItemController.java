@@ -30,11 +30,13 @@ public class ItemController {
     @GetMapping
     public Page<Item> getAllItems(
             @RequestParam(value = "page", defaultValue = "0") @Valid @PositiveOrZero int page,
-            @RequestParam(value = "limit",defaultValue = "10") @Valid @Positive int limit
+            @RequestParam(value = "limit",defaultValue = "10") @Valid @Positive int limit,
+            @RequestParam(value = "auction", required = false) Boolean auction
             ) {
         ItemFilterDto filterDto = ItemFilterDto.builder()
                 .page(page < 0 ? 0 : page)
                 .limit(limit)
+                .auction(auction)
                 .build();
         return itemService.getAllItems(filterDto);
     }
